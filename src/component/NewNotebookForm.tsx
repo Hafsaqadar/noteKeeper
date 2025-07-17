@@ -20,15 +20,13 @@ type Props = {
 };
 
 const NewNotebookForm = ({ notebooks, setNotebooks }: Props) => {
-//   const [notebooks, setNotebooks] = useState<Notebook[]>([]);
+
 const navigate = useNavigate();
 
   // Add a new input field
   const handleAddInput = () => {
     setNotebooks([...notebooks, {
-      
         id: uuidv4(),
-        //  id: Date.now().toString(),
          value: "", saved: false }]);
   };
 
@@ -37,12 +35,7 @@ const navigate = useNavigate();
     setNotebooks(notebooks.map((n, i) => i === idx ? { ...n, value: val } : n));
   };
 
-  // Save notebook on Enter
-  // const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
-  //   if (e.key === "Enter" && notebooks[idx].value.trim() !== "") {
-  //     setNotebooks(notebooks.map((n, i) => i === idx ? { ...n, saved: true } : n));
-  //   }
-  // };
+ 
 
   const handleKeyDown = async (
     e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
@@ -71,11 +64,6 @@ const navigate = useNavigate();
 
 
 
-//   handleDelete
-
-    // const handleDelete = (idx: number) => {
-    //     setNotebooks(notebooks.filter((_, i) => i !== idx));
-    // };
 const handleDelete = async (idx: number) => {
   const deletedNotebook = notebooks[idx];
 
@@ -104,21 +92,7 @@ const handleDelete = async (idx: number) => {
 };
 
 
-// If the deleted notebook was the first saved notebook
-  // Find the first saved notebook in updated list
-//   if (deletedNotebook.saved) {
-//     // Get saved notebooks sorted by position (or index)
-//     const firstSaved = updatedNotebooks.find((n) => n.saved);
 
-//     if (firstSaved) {
-//       // Redirect to the next saved notebook page
-//       navigate(`/notebook/${firstSaved.id}`);
-//     } else {
-//       // No notebooks left, redirect to home or wherever
-//       navigate(`/`);
-//     }
-//   }
-// };
 
 
     // Handle edit mode
@@ -139,8 +113,8 @@ const handleDelete = async (idx: number) => {
           <li key={idx} className="w-full ">
         {notebook.saved ? (
   <Link to={`/notebook/${notebook.id}`}>
-    <div className="bg-red-400 rounded-full py-1 pl-1 p-2 text-gray-900 w-full flex justify-between hover:bg-red-300 transition">
-      <span className="px-2">{notebook.value}</span>
+    <div className="bg-red-400 rounded-full p-1  text-gray-900 w-full flex justify-between hover:bg-red-300 transition  ">
+      <span className="px-2 truncate overflow-hidden whitespace-nowrap">{notebook.value}</span>
       <span className="flex gap-2 mt-1 cursor-pointer">
         <MdOutlineEdit onClick={(e) => { e.preventDefault(); handleEdit(idx); }} />
         <RiDeleteBin6Line onClick={(e) => { e.preventDefault(); handleDelete(idx); }} />
