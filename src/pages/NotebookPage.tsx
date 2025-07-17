@@ -33,11 +33,13 @@ const NotebookPage = ({
   const [selectedNote, setSelectedNote] = useState<Note | null>(null);
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
+   const [loading, setLoading] = useState(true);
 
   // fetch notes from firestore
   useEffect(() => {
     const fetchNotes = async () => {
       if(!notebook) return;
+      setLoading(true);
       const q = query(
       collection(db, "notes"),
       where("notebookId", "==", notebook.id)
@@ -48,6 +50,7 @@ const NotebookPage = ({
         ...(doc.data() as Omit<Note, "id">),
       }));
       setNotes(fetchedNotes);
+       setLoading(false);
     };
     fetchNotes();
   },[notebook, setNotes]);
@@ -169,7 +172,9 @@ const handleSaveNote = async (title: string, content: string) => {
 
       {/* Notes Grid */}
       <div className="mt-6">
-        {notebookNotes.length === 0 && !showNoteBox ? (
+        { loading ? (
+           <p className="text-gray-400">Loading notes...</p>
+        ): notebookNotes.length === 0 && !showNoteBox ? (
           <p className="text-gray-500">No notes yet. Click 'New Note' to start!</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
