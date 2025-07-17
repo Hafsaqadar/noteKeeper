@@ -5,6 +5,7 @@ import NoteBox from "../component/NoteBox";
 import { MdOutlineEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import {db} from "../../firebase/config";
+import { auth } from "../../firebase/config";
 
 
 import { doc, deleteDoc, updateDoc, collection, getDocs, 
@@ -60,10 +61,14 @@ const NotebookPage = ({
   }
 
 const handleSaveNote = async (title: string, content: string) => {
+   const user = auth.currentUser;
+  if (!user) return;
+
   const noteData = {
     title,
     content,
     notebookId: notebook.id,
+     uid: user.uid,
   };
 
   const docRef = await addDoc(collection(db, "notes"), noteData);
