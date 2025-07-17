@@ -2,6 +2,8 @@ import { HiPlusSm } from "react-icons/hi";
 import NewNotebookForm from "./NewNotebookForm";
 import { IoClose } from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
 
 type Notebook = {
   id: string;
@@ -50,6 +52,12 @@ const Sidebar = ({ notebooks, setNotebooks, onNewNoteClick, sidebarOpen, setSide
       >
         <HiPlusSm size={20} className="mt-1" /> new note
       </button>
+
+      <button
+     onClick={() => signOut(auth)}
+     className=" text-black font-semibold mt-2 ml-2 text-[15px] hover:underline"
+        > Logout
+       </button>
 
       <NewNotebookForm notebooks={notebooks} setNotebooks={setNotebooks} />
     </div>
