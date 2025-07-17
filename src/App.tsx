@@ -75,7 +75,7 @@ const [showNoteBox, setShowNoteBox] = useState(false);
             d="M9 12h6m2 9H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"
           />
         </svg>
-        <p className="text-xl font-semibold">No notes yet. Add some notes!</p>
+        <p className="text-xl font-semibold">No notes yet. click + noteBooks  to add one!</p>
       </div>
 
             </>
