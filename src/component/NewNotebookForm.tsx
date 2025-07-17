@@ -4,6 +4,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import React from "react";
  import { Link, useNavigate } from "react-router-dom";
  import { v4 as uuidv4 } from "uuid";
+ import { auth } from "../../firebase/config";
+
 
 
  import {db} from "../../firebase/config";
@@ -12,7 +14,9 @@ import React from "react";
  } from "firebase/firestore";
 
 
-type Notebook = { id: string; value: string; saved: boolean };
+type Notebook = { id: string; value: string; saved: boolean;
+   uid?: string;
+ };
 
 type Props = {
   notebooks: Notebook[];
@@ -41,9 +45,13 @@ const navigate = useNavigate();
     e: React.KeyboardEvent<HTMLInputElement>, idx: number) => {
     if (e.key === "Enter" && notebooks[idx].value.trim() !== "") {
       try{
+        const user = auth.currentUser;
+         if (!user) return; // prevent saving if not logged in  
+
         const docRef = await addDoc(collection(db, "notebooks"), {
           value: notebooks[idx].value,
           saved: true,
+          uid: user.uid, 
       })
       const updatedNotebooks = notebooks.map((n, i) =>
         i === idx ? { ...n, saved: true,  id: docRef.id  } : n
