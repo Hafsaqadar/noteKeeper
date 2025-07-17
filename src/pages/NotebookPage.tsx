@@ -40,7 +40,7 @@ const NotebookPage = ({
   useEffect(() => {
     const fetchNotes = async () => {
       if(!notebook) return;
-      setLoading(true);
+      setLoading(false);
       const q = query(
       collection(db, "notes"),
       where("notebookId", "==", notebook.id)
