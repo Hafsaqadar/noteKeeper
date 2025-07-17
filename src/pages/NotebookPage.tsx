@@ -177,11 +177,15 @@ const handleSaveNote = async (title: string, content: string) => {
 
       {/* Notes Grid */}
       <div className="mt-6">
-        { loading ? (
+        { loading && 
            <p className="text-gray-400">Loading notes...</p>
-        ): notebookNotes.length === 0 && !showNoteBox ? (
-          <p className="text-gray-500">No notes yet. Click 'New Note' to start!</p>
-        ) : (
+ }  {
+  !loading && notebookNotes.length === 0 && !showNoteBox && (
+       <p className="text-gray-500">No notes yet. Click 'New Note' to start!</p>
+  )
+ }
+  {!loading && notebookNotes.length >0 && (
+       
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {notebookNotes.map((note) => (
               <div
