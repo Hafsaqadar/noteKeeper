@@ -31,7 +31,7 @@ const Sidebar = ({ notebooks, setNotebooks, onNewNoteClick, sidebarOpen, setSide
 
 
 
-    {/* <div className="w-60 lg:block md:block hidden bg-orange-100 text-white p-4 min-h-screen "> */}
+    
        <div
   className={`
     fixed top-0 z-40 w-60 bg-orange-100 text-white p-4 min-h-screen transition-transform duration-300 ease-in-out
