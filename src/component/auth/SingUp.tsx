@@ -35,9 +35,10 @@ const SingUp = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 px-4">
       <div className="w-full max-w-sm p-6 bg-white rounded shadow">
-        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
-        <form onSubmit={handleSingUp} className="space-y-4">
-          <label className="block text-gray-700 font-semibold mb-2">Email</label>
+        <h2 className="text-xl font-bold mb-2 text-center">Create an Account</h2>
+        <p className="text-gray-600 text-center">Enter your email and password to sign up</p>
+        <form onSubmit={handleSingUp} className="space-y-4 mt-5">
+          <label className="block text-gray-700 font-semibold ">Email</label>
           <input
             type="email"
             placeholder="Email"
